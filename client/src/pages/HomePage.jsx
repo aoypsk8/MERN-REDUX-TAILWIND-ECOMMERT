@@ -8,10 +8,7 @@ const HomePage = () => {
     <div className="flex">
       {/* <NavBar /> */}
       <Slider />
-      {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam impedit aut
-      possimus! Numquam libero eaque fugiat tenetur ex nihil optio sit eveniet
-      quod illo, nam ab. Inventore, illo temporibus. Nihil? */}
-      <div className="w-full"></div>
+      <div className="w-full">Dashboard Page</div>
     </div>
   );
 };

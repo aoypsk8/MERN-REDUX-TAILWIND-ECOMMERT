@@ -7,6 +7,7 @@ import Register from "../pages/authentication/register";
 import UserRoute from "../pages/userRoute";
 import UserWithoutRoute from "../pages/userWithoutRoute";
 import UserPage from "../pages/UserPage";
+import Product from "../pages/Product";
 
 const Router = () => {
   const Token = localStorage.getItem("token");
@@ -23,6 +24,14 @@ const Router = () => {
           element={
             <UserRoute>
               <HomePage />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <UserRoute>
+              <Product />
             </UserRoute>
           }
         />

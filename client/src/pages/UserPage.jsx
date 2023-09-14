@@ -5,7 +5,7 @@ const UserPage = () => {
   return (
     <div className='flex '>
       <Slider />
-      <div className="h-screen w-full bg-red-200 ">hi </div>
+      <div className="h-screen w-full ">hi </div>
     </div>
   )
 }

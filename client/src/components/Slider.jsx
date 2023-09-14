@@ -8,17 +8,49 @@ import { FiSettings } from "react-icons/fi";
 import { MdOutlineCancel } from "react-icons/md";
 import logo from "../assets/logo.gif";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/reducers/userReducer";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../api/authAction";
+
+import Swal from "sweetalert2";
+
 const Slider = () => {
+  const dispatch = useDispatch();
   const [isTrue, setIsTure] = useState(false);
   const navigate = useNavigate();
   const handleShow = () => {
     setIsTure(!isTrue);
     console.log(isTrue);
   };
+
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to logout this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Logout !",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logoutUser()).then((status) => {
+          if (status == true) {
+            setTimeout(() => {
+              navigate("/");
+              WindowRefresh();
+            }, 3000);
+          }
+        });
+      }
+    });
+  };
   return (
-    <div className= {`${
-      isTrue ? "w-[300px]" : "w-16 lg:w-[300px]"
-    } h-screen relative flex flex-col items-center transition-width duration-500`}>
+    <div
+      className={`${
+        isTrue ? "w-[300px]" : "w-16 lg:w-[300px]"
+      } h-screen relative flex flex-col items-center transition-width duration-500`}
+    >
       <div className="w-full h-full hidden lg:block">
         <div className="w-full px-3 ">
           {/* logo */}
@@ -42,7 +74,10 @@ const Slider = () => {
             <BsCart3 className="w-5 h-5" />
             <p className="text-base pl-4 ">Order</p>
           </div>
-          <div className="w-full h-12 flex items-center p-4 text-gray-500 hover:text-blue-400  cursor-pointer hover:bg-blue-100 rounded-lg ">
+          <div
+            className="w-full h-12 flex items-center p-4 text-gray-500 hover:text-blue-400  cursor-pointer hover:bg-blue-100 rounded-lg "
+            onClick={() => navigate("/product")}
+          >
             <BsFillBoxSeamFill className="w-5 h-5" />
             <p className="text-base pl-4 ">Product</p>
           </div>
@@ -68,7 +103,10 @@ const Slider = () => {
             <p>To get new service</p>
           </div>
         </div>
-        <div className="w-full h-12 flex items-center p-4 mt-3 text-gray-500 hover:text-blue-400  cursor-pointer hover:bg-blue-100 rounded-lg ">
+        <div
+          className="w-full h-12 flex items-center p-4 mt-3 text-gray-500 hover:text-blue-400  cursor-pointer hover:bg-blue-100 rounded-lg "
+          onClick={handleLogout}
+        >
           <BiLogOut className="w-5 h-5" />
           <p className="text-base pl-4 ">Logout</p>
         </div>
@@ -111,6 +149,7 @@ const Slider = () => {
         </div>
         <div
           className={`w-full h-12 flex justify-start items-center px-3 mt-2 text-gray-500`}
+          onClick={() => navigate("/product")}
         >
           <BsFillBoxSeamFill className=" w-[50px] h-[30px] " />
           <p className={` ${isTrue ? "block" : "hidden"} text-base pl-2`}>
@@ -144,6 +183,7 @@ const Slider = () => {
         </div>
         <div
           className={`w-full h-12 flex justify-start items-center px-3 mt-2 text-gray-500`}
+          onClick={handleLogout}
         >
           <BiLogOut className=" w-[50px] h-[30px] " />
           <p className={` ${isTrue ? "block" : "hidden"} text-base pl-2`}>
