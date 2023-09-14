@@ -5,13 +5,31 @@ import NotFound from "../pages/NotFound";
 import Login from "../pages/authentication/login";
 import Register from "../pages/authentication/register";
 import UserRoute from "../pages/userRoute";
+import UserWithoutRoute from "../pages/userWithoutRoute";
+import UserPage from "../pages/UserPage";
 
 const Router = () => {
+  const Token = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={
+            <UserWithoutRoute>
+              <Login />
+            </UserWithoutRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <UserWithoutRoute>
+              <Register />
+            </UserWithoutRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
 
         <Route
@@ -19,6 +37,15 @@ const Router = () => {
           element={
             <UserRoute>
               <HomePage />
+            </UserRoute>
+          }
+        />
+
+        <Route
+          path="/user"
+          element={
+            <UserRoute>
+              <UserPage />
             </UserRoute>
           }
         />
